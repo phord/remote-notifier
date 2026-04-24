@@ -1,0 +1,118 @@
+{
+  "name": "remote-notifier",
+  "displayName": "Remote Notifier",
+  "description": "Receive notifications from remote scripts and tools and present them to the user as system or in-app notifications",
+  "version": "1.0.0",
+  "publisher": "ddyndo",
+  "author": "Damian Dyńdo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ripper37/remote-notifier"
+  },
+  "icon": "icon.png",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "notifications",
+    "system",
+    "native",
+    "app",
+    "remote",
+    "ssh",
+    "remote",
+    "container",
+    "docker",
+    "notification",
+    "center",
+    "toast",
+    "balloon",
+    "growl"
+  ],
+  "extensionKind": [
+    "ui"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "remoteNotifier.showNotification",
+        "title": "Remote Notifier: Show notification (internal command)"
+      },
+      {
+        "command": "remoteNotifier.testVscodeNotification",
+        "title": "Remote Notifier: Test VS Code notifications"
+      },
+      {
+        "command": "remoteNotifier.testSystemNotification",
+        "title": "Remote Notifier: Test system notifications"
+      },
+      {
+        "command": "remoteNotifier.resetIgnoredWorkspaces",
+        "title": "Remote Notifier: Reset auto-install router extension ignored workspaces"
+      }
+    ],
+    "configuration": {
+      "title": "Remote Notifier",
+      "properties": {
+        "remoteNotifier.systemNotifications": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "always",
+            "never"
+          ],
+          "default": "auto",
+          "description": "When to show OS-level system notifications. 'auto' shows them only when VS Code is unfocused, 'always' always uses OS notifications, 'never' uses only VS Code toasts."
+        },
+        "remoteNotifier.notificationIcon": {
+          "type": "string",
+          "enum": [
+            "transparent",
+            "dark"
+          ],
+          "default": "transparent",
+          "description": "Icon style for system notifications. 'transparent' has no background, 'dark' has a black background."
+        },
+        "remoteNotifier.notificationSound": {
+          "type": "boolean",
+          "default": true,
+          "description": "Play a sound when showing system-level notifications."
+        },
+        "remoteNotifier.iconMappings": {
+          "type": "object",
+          "default": {},
+          "description": "Map icon key names to file paths for system notifications. Example: { \"claude\": \"/path/to/icon.png\" }",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "package": "npm run build && npx @vscode/vsce package --no-dependencies"
+  },
+  "dependencies": {
+    "node-notifier": "^10.0.1",
+    "remote-notifier-shared": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/node-notifier": "^8.0.5",
+    "@types/vscode": "^1.85.0",
+    "esbuild": "^0.28.0",
+    "vitest": "^4.1.5"
+  }
+}

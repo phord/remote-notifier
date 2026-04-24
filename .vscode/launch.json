@@ -1,0 +1,27 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Both Extensions",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}/packages/main",
+        "--extensionDevelopmentPath=${workspaceFolder}/packages/router"
+      ],
+      "outFiles": [
+        "${workspaceFolder}/packages/main/dist/**/*.js",
+        "${workspaceFolder}/packages/router/dist/**/*.js"
+      ],
+      "preLaunchTask": "build-all"
+    },
+    {
+      "name": "Run Router Extension Only",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": ["--extensionDevelopmentPath=${workspaceFolder}/packages/router"],
+      "outFiles": ["${workspaceFolder}/packages/router/dist/**/*.js"],
+      "preLaunchTask": "build-router"
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "name": "remote-notifier-router",
+  "displayName": "Remote Notifier (Router)",
+  "description": "Receive notifications from remote scripts and route them to the main Remote Notifier extension to trigger notification for the user",
+  "version": "1.0.0",
+  "publisher": "ddyndo",
+  "author": "Damian Dyńdo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ripper37/remote-notifier"
+  },
+  "icon": "icon.png",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "notifications",
+    "system",
+    "native",
+    "app",
+    "remote",
+    "ssh",
+    "remote",
+    "container",
+    "docker",
+    "notification",
+    "center",
+    "toast",
+    "balloon",
+    "growl"
+  ],
+  "extensionKind": [
+    "workspace"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "remoteNotifier.ensureRouterStarted",
+        "title": "Remote Notifier: Ensure Router extension started (internal command)"
+      },
+      {
+        "command": "remoteNotifier.showSessionInfo",
+        "title": "Remote Notifier: Show session info"
+      },
+      {
+        "command": "remoteNotifier.regenerateToken",
+        "title": "Remote Notifier: Regenerate token"
+      },
+      {
+        "command": "remoteNotifier.copyNotifyCommand",
+        "title": "Remote Notifier: Copy Notify command"
+      },
+      {
+        "command": "remoteNotifier.installScript",
+        "title": "Remote Notifier: Install code-notify command in current workspace"
+      },
+      {
+        "command": "remoteNotifier.autoConfigure",
+        "title": "Remote Notifier: Auto-configure notifications in current workspace for..."
+      }
+    ],
+    "configuration": {
+      "title": "Remote Notifier (Router)",
+      "properties": {
+        "remoteNotifier.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable/disable the notification server."
+        },
+        "remoteNotifier.port": {
+          "type": "integer",
+          "default": 0,
+          "description": "Fixed port for the notification server. 0 = auto-assign."
+        },
+        "remoteNotifier.maxBodySize": {
+          "type": "integer",
+          "default": 65536,
+          "description": "Maximum request body size in bytes."
+        },
+        "remoteNotifier.notificationLevel": {
+          "type": "string",
+          "enum": [
+            "information",
+            "warning",
+            "error"
+          ],
+          "default": "information",
+          "description": "Default notification level when not specified in the request."
+        },
+        "remoteNotifier.showTimestamp": {
+          "type": "boolean",
+          "default": false,
+          "description": "Prepend a timestamp to notification messages."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "package": "npm run build && npx @vscode/vsce package --no-dependencies"
+  },
+  "dependencies": {
+    "remote-notifier-shared": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "esbuild": "^0.28.0",
+    "vitest": "^4.1.5"
+  }
+}

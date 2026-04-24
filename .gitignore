@@ -1,0 +1,10 @@
+node_modules/
+dist/
+*.vsix
+.vscode-test/
+coverage/
+*.js.map
+.claude/
+packages/*/icon.png
+packages/*/LICENSE
+packages/main/README.md

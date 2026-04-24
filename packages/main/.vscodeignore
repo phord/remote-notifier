@@ -1,0 +1,14 @@
+# Ignore everything by default
+**
+
+# Allow specific files in this package
+!package.json
+!dist/**
+!icon.png
+!README.md
+!LICENSE
+
+# Explicitly ignore parent directory
+..
+../**
+../../**
